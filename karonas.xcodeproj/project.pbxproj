@@ -16,7 +16,6 @@
 		B350E2872A6F0903002D3049 /* AddCaronaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B350E2862A6F0903002D3049 /* AddCaronaView.swift */; };
 		B36C77732A71D91A00C8CC41 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36C77722A71D91A00C8CC41 /* CardView.swift */; };
 		B36C77772A7375E600C8CC41 /* NavCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36C77762A7375E600C8CC41 /* NavCardView.swift */; };
-		B36C777B2A73A11C00C8CC41 /* HourAndMinutesCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36C777A2A73A11C00C8CC41 /* HourAndMinutesCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +29,6 @@
 		B350E2862A6F0903002D3049 /* AddCaronaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCaronaView.swift; sourceTree = "<group>"; };
 		B36C77722A71D91A00C8CC41 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		B36C77762A7375E600C8CC41 /* NavCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavCardView.swift; sourceTree = "<group>"; };
-		B36C777A2A73A11C00C8CC41 /* HourAndMinutesCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourAndMinutesCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +102,6 @@
 		B350E2852A6F08D5002D3049 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				B36C777A2A73A11C00C8CC41 /* HourAndMinutesCalculator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -180,7 +177,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B36C77772A7375E600C8CC41 /* NavCardView.swift in Sources */,
-				B36C777B2A73A11C00C8CC41 /* HourAndMinutesCalculator.swift in Sources */,
 				B350E2732A6F01AD002D3049 /* ContentView.swift in Sources */,
 				B350E2832A6F033A002D3049 /* DataController.swift in Sources */,
 				B350E2812A6F01FC002D3049 /* CaronaModel.xcdatamodeld in Sources */,

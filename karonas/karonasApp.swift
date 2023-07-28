@@ -16,7 +16,7 @@ struct karonasApp: App {
             init() {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                     if success {
-                        print("All set!")
+                        print("autorizado!")
                     } else if let error = error {
                         print(error.localizedDescription)
                     }

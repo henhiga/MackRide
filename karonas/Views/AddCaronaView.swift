@@ -34,7 +34,14 @@ struct AddCaronaView: View {
                     Toggle("Oferecendo carona?", isOn: $pocarona)
                         .toggleStyle(SwitchToggleStyle(tint: .red))
                     TextField("Contato(ex: 11912345678 ou @exemplo)", text: $contato)
+                    Text("Por favor preencha todos os campos")
+                        .foregroundColor(.red)
+                        .disabled(textIsAppropriate() ? false : true)
+                        .listRowBackground(textIsAppropriate() ? Color("Transparent") : .white)
+                        .opacity(textIsAppropriate() ? 0 : 1)
+                        .transition(textIsAppropriate() ? AnyTransition.opacity.animation(.easeInOut(duration:0.15)) : .scale)
                 }
+                
             }
             .accentColor(.red)
             .navigationTitle("Criar")
@@ -47,9 +54,17 @@ struct AddCaronaView: View {
                     } label: {
                         Text("Criar")
                     }
+                    .foregroundColor(textIsAppropriate() ? .blue : .gray)
+                    .disabled(textIsAppropriate() ? false : true)
                 }
             }
         }
+    }
+    func textIsAppropriate() -> Bool {
+        if (name.count > 2 && local.count > 2 && contato.count > 2){
+            return true
+        }
+        return false
     }
 }
 
