@@ -10,7 +10,6 @@ import SwiftUI
 struct CardView: View {
     @Environment(\.managedObjectContext) var managedObjContext
     @Environment(\.colorScheme) var colorScheme
-    @Environment(\.dismiss) var dismiss
     
     var caronas: FetchedResults<Caronas>.Element
     

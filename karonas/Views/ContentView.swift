@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var managedObjContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var caronas: FetchedResults<Caronas>
     
@@ -19,7 +18,7 @@ struct ContentView: View {
             VStack() {
                 List{
                     ForEach(caronas) { caronas in
-                        NavigationLink(destination: Text("\(caronas.local!)")) {
+                        NavigationLink(destination: NavCardView(caronas: caronas)) {
                             CardView(caronas:caronas)
                         }
                         
