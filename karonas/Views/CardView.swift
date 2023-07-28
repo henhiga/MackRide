@@ -31,7 +31,7 @@ struct CardView: View {
             Circle()
                 .strokeBorder(colorScheme == .dark ? Color("DarkTheme.Red") : Color.red, lineWidth: 4)
                 .frame(width: 20)
-                .position(x: 100, y:-30)
+                .position(x: 100, y:-29)
             VStack{
                 Text(caronas.saindo == true ? "Mackenzie" : caronas.local!)
                     .multilineTextAlignment(.leading)
