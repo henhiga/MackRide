@@ -71,18 +71,17 @@ struct NavCardView: View {
                 Text(caronas.contato!)
                     .frame(width: 320, height: 20, alignment: .leading)
                     .position(x: 197.5,y: -230)
-                Button("Mandar notificação"){
+                Button("Mandar notificação da saída"){
                     SendNoti()
                     clickou = true
-                }
-                
-                .frame(width: 200, height: 60)
-                .background(clickou ? .gray : .red)
-                .clipShape(Capsule())
-                .foregroundStyle(.white)
-                .padding()
-                .opacity(checkNotification() ? 1 : 0)
-                .disabled(clickou ? true : false)
+                    }
+                    .frame(width: 200, height: 60)
+                    .background(clickou ? .gray : .red)
+                    .clipShape(Capsule())
+                    .foregroundStyle(.white)
+                    .padding()
+                    .opacity(checkNotification() ? 1 : 0)
+                    .disabled(clickou ? true : false)
             }
             
         }
@@ -131,7 +130,5 @@ struct NavCardView: View {
 
         // add our notification request
         UNUserNotificationCenter.current().add(request)
-    }
-
-
+}
 }
