@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var showingAddView = false
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack() {
                 List{
                     ForEach(caronas) { caronas in

@@ -13,10 +13,11 @@ struct NavCardView: View {
     @Environment(\.colorScheme) var colorScheme
     var caronas: FetchedResults<Caronas>.Element
     var calendar = Calendar.current
+    @State var clickou = false
     
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack{
                 Text(caronas.name!)
                     .font(.title2)
@@ -71,52 +72,17 @@ struct NavCardView: View {
                     .frame(width: 320, height: 20, alignment: .leading)
                     .position(x: 197.5,y: -230)
                 Button("Mandar notificação"){
-                    let content = UNMutableNotificationContent()
-                    content.title = "Sua carona está próxima!"
-                    content.subtitle = "Está a 15 minutos"
-                    content.sound = UNNotificationSound.default
-                    content.badge = 0
-                    
-                    var dateComponents = DateComponents()
-                    var minutos = calendar.component(.minute, from: caronas.date1!)
-                    var horas = calendar.component(.hour, from: caronas.date1!)
-                    print(minutos, horas)
-                    if(minutos < 15 && horas == 0){
-                        minutos -= 15
-                        minutos += 60
-                        horas = 23
-                        print(horas, minutos, "sssssss")
-                    } else if (minutos < 15){
-                        minutos -= 15
-                        minutos += 60
-                        horas -= 1
-                        print(horas, minutos, "seg")
-                    }else if (horas == 0){
-                        minutos -= 15
-                        horas = 23
-                        print(horas, minutos, "terc")
-                    }else {
-                        minutos -= 15
-                        print(horas, minutos, "quar")
-                    }
-                    dateComponents.hour = horas
-                    dateComponents.minute = minutos
-
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-                    // choose a random identifier
-                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-                    // add our notification request
-                    UNUserNotificationCenter.current().add(request)
-                    
+                    SendNoti()
+                    clickou = true
                 }
                 
                 .frame(width: 200, height: 60)
-                .background(.red)
+                .background(clickou ? .gray : .red)
                 .clipShape(Capsule())
                 .foregroundStyle(.white)
                 .padding()
                 .opacity(checkNotification() ? 1 : 0)
+                .disabled(clickou ? true : false)
             }
             
         }
@@ -127,6 +93,45 @@ struct NavCardView: View {
             }
             return settings.types.intersection([.alert, .badge, .sound]).isEmpty != true
         }
+    func SendNoti() {
+        let content = UNMutableNotificationContent()
+        content.title = "Sua carona está próxima!"
+        content.subtitle = "Está a 15 minutos"
+        content.sound = UNNotificationSound.default
+        content.badge = 0
+        
+        var dateComponents = DateComponents()
+        var minutos = calendar.component(.minute, from: caronas.date1!)
+        var horas = calendar.component(.hour, from: caronas.date1!)
+        print(minutos, horas)
+        if(minutos < 15 && horas == 0){
+            minutos -= 15
+            minutos += 60
+            horas = 23
+            print(horas, minutos, "sssssss")
+        } else if (minutos < 15){
+            minutos -= 15
+            minutos += 60
+            horas -= 1
+            print(horas, minutos, "seg")
+        }else if (horas == 0){
+            minutos -= 15
+            horas = 23
+            print(horas, minutos, "terc")
+        }else {
+            minutos -= 15
+            print(horas, minutos, "quar")
+        }
+        dateComponents.hour = horas
+        dateComponents.minute = minutos
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+        // add our notification request
+        UNUserNotificationCenter.current().add(request)
+    }
 
 
 }

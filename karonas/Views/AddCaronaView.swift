@@ -10,6 +10,7 @@ import SwiftUI
 struct AddCaronaView: View {
     @Environment (\.managedObjectContext) var ManagedObjContext
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
     
     @State private var name=""
     @State private var local=""
@@ -37,7 +38,7 @@ struct AddCaronaView: View {
                     Text("Por favor preencha todos os campos")
                         .foregroundColor(.red)
                         .disabled(textIsAppropriate() ? false : true)
-                        .listRowBackground(textIsAppropriate() ? Color("Transparent") : .white)
+                        .listRowBackground(textIsAppropriate() ? Color("Transparent") : colorScheme == .dark ? Color("DarkTheme.Form") : .white)
                         .opacity(textIsAppropriate() ? 0 : 1)
                         .transition(textIsAppropriate() ? AnyTransition.opacity.animation(.easeInOut(duration:0.15)) : .scale)
                 }
