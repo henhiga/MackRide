@@ -44,6 +44,7 @@ struct ContentView: View {
             }
         }
     }
+    
     private func deleteCarona(offsets: IndexSet){
         offsets.map { caronas[$0] }.forEach(managedObjContext.delete)
         DataController().save(context: managedObjContext)

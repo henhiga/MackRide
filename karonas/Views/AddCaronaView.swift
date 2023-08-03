@@ -26,14 +26,13 @@ struct AddCaronaView: View {
             Form {
                 Section(header: Text("Informações"))  {
                     TextField("Nome", text: $name)
-                    
-                    Toggle("Saindo do Mackenzie?", isOn: $saindo)
-                        .toggleStyle(SwitchToggleStyle(tint: .red))
-                    TextField(saindo==false ? "Local de saída" : "Local de chegada", text: $local)
-                    DatePicker("Horário de saída", selection: $date1, displayedComponents: .hourAndMinute)
-                    DatePicker("Horário de chegada", selection: $dateche, displayedComponents: .hourAndMinute)
                     Toggle("Oferecendo carona?", isOn: $pocarona)
                         .toggleStyle(SwitchToggleStyle(tint: .red))
+                    Toggle("Saindo do Mackenzie?", isOn: $saindo)
+                        .toggleStyle(SwitchToggleStyle(tint: .red))
+                    TextField(saindo==false ? "Local de saída (ex: rua ou bairro)" : "Local de chegada (ex: rua ou bairro)", text: $local)
+                    DatePicker("Horário de saída", selection: $date1, displayedComponents: .hourAndMinute)
+                    DatePicker("Horário de chegada", selection: $dateche, displayedComponents: .hourAndMinute)
                     TextField("Contato(ex: 11912345678 ou @exemplo)", text: $contato)
                     Text("Por favor preencha todos os campos")
                         .foregroundColor(.red)

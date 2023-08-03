@@ -11,6 +11,7 @@ struct CardView: View {
     @Environment(\.managedObjectContext) var managedObjContext
     @Environment(\.colorScheme) var colorScheme
     
+    
     var caronas: FetchedResults<Caronas>.Element
     
     var body: some View {

@@ -8,12 +8,16 @@
 import SwiftUI
 import UserNotifications
 
+
 struct NavCardView: View {
     @Environment(\.managedObjectContext) var managedObjContext
     @Environment(\.colorScheme) var colorScheme
     var caronas: FetchedResults<Caronas>.Element
     var calendar = Calendar.current
     @State var clickou = false
+    @State var isPresenting = false
+    @State private var textodoalerta = Article(title: "Notificação da saída", description: "Será enviado uma notificação de segunda a sexta 15 minutos antes do horário de saída")
+    
     
     
     var body: some View {
@@ -68,12 +72,11 @@ struct NavCardView: View {
                     .bold()
                     .position(x: 195,y: -191)
                 
-                Text(caronas.contato!)
+                Link(caronas.contato!, destination: apenasNumeros())
                     .frame(width: 320, height: 20, alignment: .leading)
                     .position(x: 197.5,y: -230)
                 Button("Mandar notificação da saída"){
-                    SendNoti()
-                    clickou = true
+                    isPresenting = true
                     }
                     .frame(width: 200, height: 60)
                     .background(clickou ? .gray : .red)
@@ -82,6 +85,14 @@ struct NavCardView: View {
                     .padding()
                     .opacity(checkNotification() ? 1 : 0)
                     .disabled(clickou ? true : false)
+                    .alert(textodoalerta.title, isPresented: $isPresenting, presenting: textodoalerta) {article in
+                        Button("OK") { SendNoti()
+                            clickou = true
+                        }
+                        Button("Cancelar", role: .cancel) {}
+                    } message: {article in
+                        Text(textodoalerta.description)
+                    }
             }
             
         }
@@ -123,6 +134,7 @@ struct NavCardView: View {
         }
         dateComponents.hour = horas
         dateComponents.minute = minutos
+        dateComponents.weekday = 2
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         // choose a random identifier
@@ -130,5 +142,52 @@ struct NavCardView: View {
 
         // add our notification request
         UNUserNotificationCenter.current().add(request)
-}
+        
+        dateComponents.weekday = 3
+
+        let trigger3 = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        // choose a random identifier
+        let request3 = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger3)
+
+        // add our notification request
+        UNUserNotificationCenter.current().add(request3)
+        
+        dateComponents.weekday = 4
+
+        let trigger4 = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        // choose a random identifier
+        let request4 = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger4)
+
+        // add our notification request
+        UNUserNotificationCenter.current().add(request4)
+        
+        dateComponents.weekday = 5
+
+        let trigger5 = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        // choose a random identifier
+        let request5 = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger5)
+
+        // add our notification request
+        UNUserNotificationCenter.current().add(request5)
+        
+        dateComponents.weekday = 6
+
+        let trigger6 = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        // choose a random identifier
+        let request6 = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger6)
+
+        // add our notification request
+        UNUserNotificationCenter.current().add(request6)
+    }
+    func apenasNumeros() -> URL{
+        let teste = CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: caronas.contato!))
+        let teste2 = caronas.contato!
+        if teste == true{
+            let teste3 = URL(string: "https://wa.me/\(teste2)")!
+            return teste3
+        }else {
+            let teste4 = URL(string: "https://instagram.com/\(teste2)")!
+            return teste4
+        }
+    }
 }
